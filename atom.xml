@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>即墨的个人博客</title>
+  
+  <subtitle>即墨的个人博客</subtitle>
+  <link href="/rgwblog/atom.xml" rel="self"/>
+  
+  <link href="http://renguowei.gitee.io/rgwblog/"/>
+  <updated>2019-05-03T08:44:57.495Z</updated>
+  <id>http://renguowei.gitee.io/rgwblog/</id>
+  
+  <author>
+    <name>即墨</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>前端定位实现</title>
+    <link href="http://renguowei.gitee.io/rgwblog/2019/05/03/getlocal/"/>
+    <id>http://renguowei.gitee.io/rgwblog/2019/05/03/getlocal/</id>
+    <published>2019-05-03T08:19:57.000Z</published>
+    <updated>2019-05-03T08:44:57.495Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先，需要引入百度api</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://api.map.baidu.com/api?v=1.2&amp;ak=密匙"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure><a id="more"></a><p>在vue项目中需要把api改为getscript</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://api.map.baidu.com/getscript?v=1.2&amp;ak=密匙"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure><p>h5定位</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getlocal</span>(<span class="params">getlocalSuccess</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//首先设置默认城市</span></span><br><span class="line">    <span class="keyword">var</span> defCity = &#123;</span><br><span class="line">        id: <span class="string">'000001'</span>,</span><br><span class="line">        city: <span class="string">'北京'</span>,</span><br><span class="line">        province: <span class="string">""</span>,</span><br><span class="line">        district: <span class="string">""</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span> (navigator.geolocation) &#123;</span><br><span class="line">        navigator.geolocation.getCurrentPosition(</span><br><span class="line">            <span class="function"><span class="keyword">function</span> (<span class="params">position</span>) </span>&#123;</span><br><span class="line">              <span class="comment">//获取地理位置成功时所做的处理</span></span><br><span class="line">                <span class="keyword">var</span> lat = position.coords.latitude;<span class="comment">//估计精度</span></span><br><span class="line">                <span class="keyword">var</span> lon = position.coords.longitude;<span class="comment">//估计纬度</span></span><br><span class="line">                <span class="keyword">var</span> point = <span class="keyword">new</span> BMap.Point(lon, lat); <span class="comment">// 创建点坐标</span></span><br><span class="line">                <span class="keyword">var</span> gc = <span class="keyword">new</span> BMap.Geocoder();</span><br><span class="line">                </span><br><span class="line">                gc.getLocation(point, <span class="function"><span class="keyword">function</span> (<span class="params">rs</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">var</span> addComp = rs.addressComponents;</span><br><span class="line">                    <span class="keyword">var</span> curCity = &#123;</span><br><span class="line">                        id: <span class="string">''</span>,</span><br><span class="line">                        city: addComp.city,</span><br><span class="line">                        province: addComp.province,</span><br><span class="line">                        district: addComp.district</span><br><span class="line">                    &#125;</span><br><span class="line">                    </span><br><span class="line">                    <span class="keyword">if</span> (getlocalSuccess != <span class="literal">undefined</span>) &#123;</span><br><span class="line">                        getlocalSuccess(curCity);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">            <span class="comment">//获取地理位置失败时所做的处理</span></span><br><span class="line">                <span class="keyword">switch</span> (error.code) &#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                        alert(<span class="string">"位置服务被拒绝。"</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                        alert(<span class="string">"暂时获取不到位置信息。"</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                        alert(<span class="string">"获取位置信息超时。"</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">default</span>:</span><br><span class="line">                        alert(<span class="string">"未知错误。"</span>);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            )</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (getlocalSuccess != <span class="literal">undefined</span>) &#123;</span><br><span class="line">            getlocalSuccess(defCity);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>百度定位通过ip地址定位<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myCity = <span class="keyword">new</span> BMap.LocalCity();</span><br><span class="line">myCity.get(relocation);</span><br><span class="line"><span class="comment">//初始化定位</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">relocation</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">    that.address = result.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;首先，需要引入百度api&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;script type=&lt;span class=&quot;string&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt; src=&lt;span class=&quot;string&quot;&gt;&quot;http://api.map.baidu.com/api?v=1.2&amp;amp;ak=密匙&quot;&lt;/span&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>第一次</title>
+    <link href="http://renguowei.gitee.io/rgwblog/2019/05/02/first/"/>
+    <id>http://renguowei.gitee.io/rgwblog/2019/05/02/first/</id>
+    <published>2019-05-02T07:32:09.000Z</published>
+    <updated>2019-05-02T08:34:20.112Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用hexo+码云搭建的的个人博客网站，这是测试文章</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用hexo+码云搭建的的个人博客网站，这是测试文章&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
