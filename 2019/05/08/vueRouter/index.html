@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="vue路由使用1.安装vue路由1npm install vue-router 2.在src中新建router/index.js,引入vue路由123import Vue from &amp;apos;vue&amp;apos;import VueRouter from &amp;apos;vue-router&amp;apos;//引入vue-routerVue.use(VueRouter) 3.引入组件，并创建vue路由">
+<meta name="description" content="vue路由使用1.安装vue路由1npm install vue-router">
 <meta name="keywords" content="vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vue路由">
 <meta property="og:url" content="http://renguowei.gitee.io/rgwblog/2019/05/08/vueRouter/index.html">
 <meta property="og:site_name" content="即墨的个人博客">
-<meta property="og:description" content="vue路由使用1.安装vue路由1npm install vue-router 2.在src中新建router/index.js,引入vue路由123import Vue from &amp;apos;vue&amp;apos;import VueRouter from &amp;apos;vue-router&amp;apos;//引入vue-routerVue.use(VueRouter) 3.引入组件，并创建vue路由">
+<meta property="og:description" content="vue路由使用1.安装vue路由1npm install vue-router">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-08T07:37:02.092Z">
+<meta property="og:updated_time" content="2019-05-08T07:39:33.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vue路由">
-<meta name="twitter:description" content="vue路由使用1.安装vue路由1npm install vue-router 2.在src中新建router/index.js,引入vue路由123import Vue from &amp;apos;vue&amp;apos;import VueRouter from &amp;apos;vue-router&amp;apos;//引入vue-routerVue.use(VueRouter) 3.引入组件，并创建vue路由">
+<meta name="twitter:description" content="vue路由使用1.安装vue路由1npm install vue-router">
 
 
 
@@ -189,16 +189,6 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/rgwblog/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            关于
           </a>
         </li>
       
@@ -345,6 +335,7 @@
 
       
         <h4 id="vue路由使用"><a href="#vue路由使用" class="headerlink" title="vue路由使用"></a>vue路由使用</h4><p>1.安装vue路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-router</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>2.在src中新建router/index.js,引入vue路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import VueRouter from &apos;vue-router&apos;//引入vue-router</span><br><span class="line">Vue.use(VueRouter)</span><br></pre></td></tr></table></figure></p>
 <p>3.引入组件，并创建vue路由<br>  *在这里，可以使用@进行引入，@相当于src目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import Home from &quot;../components/Home&quot;;</span><br><span class="line">import header from &quot;../components/Header&quot;;</span><br><span class="line">import List from &quot;@/components/List&quot;;//@相当于src目录</span><br><span class="line">import footer from &quot;../components/footer&quot;;</span><br><span class="line">const routes=[</span><br><span class="line">    &#123;path:&quot;/&quot;,component:Home&#125;,//默认页</span><br><span class="line">    &#123;path:&quot;/header&quot;,component:header&#125;,</span><br><span class="line">    &#123;path:&quot;/List&quot;,component:List&#125;,</span><br><span class="line">    &#123;path:&quot;/footer&quot;,component:footer&#125;,</span><br><span class="line">]</span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">    routes: routes,</span><br><span class="line">    mode:&quot;history&quot; //去掉地址栏的#号</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></p>
 <p>4.在main.js中引入router/index.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import router from &quot;@/router/index&quot;;</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  router:router,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
