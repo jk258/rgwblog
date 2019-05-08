@@ -6,7 +6,7 @@
   <link href="/rgwblog/atom.xml" rel="self"/>
   
   <link href="http://renguowei.gitee.io/rgwblog/"/>
-  <updated>2019-05-05T09:51:34.773Z</updated>
+  <updated>2019-05-08T07:37:02.092Z</updated>
   <id>http://renguowei.gitee.io/rgwblog/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue路由</title>
+    <link href="http://renguowei.gitee.io/rgwblog/2019/05/08/vueRouter/"/>
+    <id>http://renguowei.gitee.io/rgwblog/2019/05/08/vueRouter/</id>
+    <published>2019-05-08T03:51:29.000Z</published>
+    <updated>2019-05-08T07:37:02.092Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="vue路由使用"><a href="#vue路由使用" class="headerlink" title="vue路由使用"></a>vue路由使用</h4><p>1.安装vue路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-router</span><br></pre></td></tr></table></figure></p><p>2.在src中新建router/index.js,引入vue路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import VueRouter from &apos;vue-router&apos;//引入vue-router</span><br><span class="line">Vue.use(VueRouter)</span><br></pre></td></tr></table></figure></p><p>3.引入组件，并创建vue路由<br>  *在这里，可以使用@进行引入，@相当于src目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import Home from &quot;../components/Home&quot;;</span><br><span class="line">import header from &quot;../components/Header&quot;;</span><br><span class="line">import List from &quot;@/components/List&quot;;//@相当于src目录</span><br><span class="line">import footer from &quot;../components/footer&quot;;</span><br><span class="line">const routes=[</span><br><span class="line">    &#123;path:&quot;/&quot;,component:Home&#125;,//默认页</span><br><span class="line">    &#123;path:&quot;/header&quot;,component:header&#125;,</span><br><span class="line">    &#123;path:&quot;/List&quot;,component:List&#125;,</span><br><span class="line">    &#123;path:&quot;/footer&quot;,component:footer&#125;,</span><br><span class="line">]</span><br><span class="line">export default new VueRouter(&#123;</span><br><span class="line">    routes: routes,</span><br><span class="line">    mode:&quot;history&quot; //去掉地址栏的#号</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure></p><p>4.在main.js中引入router/index.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import router from &quot;@/router/index&quot;;</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  router:router,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p><p>5.路由跳转<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;/&quot;&gt;首页&lt;/router-link&gt;</span><br><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br></pre></td></tr></table></figure></p><p>方法跳转,在methods中定义一个方法，通过事件执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">routerpush()&#123;</span><br><span class="line">            this.$router.push(&#123; path: &apos;/List&apos; &#125;)//路由跳转</span><br><span class="line">            // this.$router.go(1);//在 history 记录中向前或者后退多少步</span><br><span class="line">            // this.$router.replace(&#123; path: &apos;/List&apos; &#125;)//路由跳转,但不会向history中添加记录</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p><h3 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h3><p>1.params传参<br>路由配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;path:&quot;/List&quot;,</span><br><span class="line">name:&quot;分类&quot;,</span><br><span class="line">components:List</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p><p>父组件中：通过路由属性中的name来确定匹配的路由，通过params来传递参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$router.push(&#123; name:&quot;分类&quot;,params:&#123;id:33&#125; &#125;)</span><br></pre></td></tr></table></figure></p><p>子组件中通过this.$route.params.id获取参数<br>2.query传参<br>路由配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;path:&quot;/List&quot;,</span><br><span class="line">name:&quot;分类&quot;,</span><br><span class="line">components:List</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p><p>父组件中：通过路由属性中的name来确定匹配的路由，通过query来传递参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$router.push(&#123; name:&quot;分类&quot;,query:&#123;id:33&#125; &#125;)</span><br></pre></td></tr></table></figure></p><p>子组件中通过this.$route.query.id获取参数</p><p>*区别：query是把参数放在地址栏上，刷新不会消失，params不会把参数放在地址上，刷新后消失</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;vue路由使用&quot;&gt;&lt;a href=&quot;#vue路由使用&quot; class=&quot;headerlink&quot; title=&quot;vue路由使用&quot;&gt;&lt;/a&gt;vue路由使用&lt;/h4&gt;&lt;p&gt;1.安装vue路由&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;tabl
+      
+    
+    </summary>
+    
+      <category term="vue" scheme="http://renguowei.gitee.io/rgwblog/categories/vue/"/>
+    
+    
+      <category term="vue" scheme="http://renguowei.gitee.io/rgwblog/tags/vue/"/>
+    
+  </entry>
   
   <entry>
     <title>移动端标尺</title>
